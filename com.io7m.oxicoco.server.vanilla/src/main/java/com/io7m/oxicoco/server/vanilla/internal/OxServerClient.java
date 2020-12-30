@@ -44,7 +44,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -255,7 +254,9 @@ public final class OxServerClient implements Closeable
     if (handler != null) {
       handler.execute(this.context, lineWriter, message);
     } else {
-      this.sendError(lineWriter, OxIRCErrorCommandUnknown.of(message.command()));
+      this.sendError(
+        lineWriter,
+        OxIRCErrorCommandUnknown.of(message.command()));
     }
   }
 

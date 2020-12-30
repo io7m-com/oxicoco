@@ -20,7 +20,6 @@ import com.io7m.immutables.styles.ImmutablesStyleType;
 import org.immutables.value.Value;
 
 import java.util.Set;
-import java.util.UUID;
 
 @ImmutablesStyleType
 @Value.Immutable

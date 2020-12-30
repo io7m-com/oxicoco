@@ -21,7 +21,6 @@ import com.io7m.oxicoco.names.OxNickName;
 import org.immutables.value.Value;
 
 import java.util.Optional;
-import java.util.UUID;
 
 public interface OxServerEventType
 {

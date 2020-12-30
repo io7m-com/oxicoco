@@ -25,7 +25,6 @@ import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.UUID;
 import java.util.function.Function;
 
 import static com.io7m.oxicoco.server.vanilla.internal.OxChannelJoinResultType.JoinStatus.CHANNEL_ALREADY_JOINED;

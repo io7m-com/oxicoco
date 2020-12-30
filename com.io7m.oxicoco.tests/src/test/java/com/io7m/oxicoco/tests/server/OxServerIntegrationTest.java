@@ -186,6 +186,13 @@ public final class OxServerIntegrationTest
   {
     send(this.outputWriterA, "NICK x");
 
+    assertTimeout(Duration.ofSeconds(2L), () -> {
+      assertEquals(
+        ":com.example 001 x",
+        this.inputReaderA.readLine()
+      );
+    });
+
     send(this.outputWriterB, "NICK x");
 
     assertTimeout(Duration.ofSeconds(2L), () -> {

@@ -41,6 +41,7 @@ import com.io7m.oxicoco.server.vanilla.internal.OxServerChannelJoined;
 import com.io7m.oxicoco.server.vanilla.internal.OxServerChannelParted;
 import com.io7m.oxicoco.server.vanilla.internal.OxServerClientCreated;
 import com.io7m.oxicoco.server.vanilla.internal.OxServerClientDestroyed;
+import com.io7m.oxicoco.server.vanilla.internal.OxServerClientID;
 import com.io7m.oxicoco.server.vanilla.internal.OxServerClientNickChanged;
 import com.io7m.oxicoco.server.vanilla.internal.OxUserID;
 import nl.jqno.equalsverifier.EqualsVerifier;
@@ -49,13 +50,11 @@ import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.mockito.Mockito;
 
-import java.io.FileDescriptor;
 import java.net.Socket;
 import java.util.stream.Stream;
 
 public final class OxEqualsTest
 {
-
   private static DynamicTest toTest(
     final Class<?> clazz)
   {
@@ -76,10 +75,13 @@ public final class OxEqualsTest
   public Stream<DynamicTest> testEquals()
   {
     return Stream.of(
-      OxIRCErrorCommandUnknown.class,
+      OxChannelJoinResult.class,
+      OxChannelName.class,
+      OxChannelPartResult.class,
       OxIRCErrorChannelInvalid.class,
       OxIRCErrorChannelNonexistent.class,
       OxIRCErrorChannelNotIn.class,
+      OxIRCErrorCommandUnknown.class,
       OxIRCErrorNeedMoreParameters.class,
       OxIRCErrorNickCollision.class,
       OxIRCErrorNickInvalid.class,
@@ -87,22 +89,20 @@ public final class OxEqualsTest
       OxIRCErrorTopicInvalid.class,
       OxIRCErrorUserInvalid.class,
       OxIRCMessage.class,
-      OxChannelName.class,
       OxNickName.class,
-      OxServerName.class,
-      OxTopic.class,
-      OxUserName.class,
-      OxServerConfiguration.class,
-      OxServerPortConfiguration.class,
-      OxChannelJoinResult.class,
-      OxChannelPartResult.class,
       OxServerChannelCreated.class,
       OxServerChannelJoined.class,
       OxServerChannelParted.class,
       OxServerClientCreated.class,
       OxServerClientDestroyed.class,
+      OxServerClientID.class,
       OxServerClientNickChanged.class,
-      OxUserID.class
+      OxServerConfiguration.class,
+      OxServerName.class,
+      OxServerPortConfiguration.class,
+      OxTopic.class,
+      OxUserID.class,
+      OxUserName.class
     ).map(OxEqualsTest::toTest);
   }
 }

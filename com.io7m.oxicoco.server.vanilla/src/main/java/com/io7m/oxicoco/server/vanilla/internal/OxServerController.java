@@ -40,7 +40,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -55,7 +54,7 @@ public final class OxServerController implements OxServerControllerType
   private final OxServerConfiguration configuration;
   private final Clock clock;
   private final OxIRCMessageParserFactoryType parsers;
-  private final Supplier<UUID> idSupplier;
+  private final Supplier<OxServerClientID> idSupplier;
   private final OffsetDateTime timeStart;
 
   private final Object stateLock;
@@ -68,7 +67,7 @@ public final class OxServerController implements OxServerControllerType
     final OxServerConfiguration inConfiguration,
     final Clock inClock,
     final OxIRCMessageParserFactoryType inParsers,
-    final Supplier<UUID> inIdSupplier)
+    final Supplier<OxServerClientID> inIdSupplier)
   {
     this.configuration =
       Objects.requireNonNull(inConfiguration, "inConfiguration");
@@ -124,7 +123,7 @@ public final class OxServerController implements OxServerControllerType
 
   private OxServerClient clientCreateInternal(
     final Socket socket,
-    final UUID clientId)
+    final OxServerClientID clientId)
   {
     return new OxServerClient(
       this.configuration,
@@ -186,7 +185,7 @@ public final class OxServerController implements OxServerControllerType
     return oldNameOpt;
   }
 
-  private Collection<UUID> clientsWatching(
+  private Collection<OxServerClientID> clientsWatching(
     final OxServerClient client)
   {
     synchronized (this.stateLock) {
@@ -328,7 +327,7 @@ public final class OxServerController implements OxServerControllerType
 
   private void sendMessageToClients(
     final OxIRCMessage message,
-    final Collection<UUID> targets)
+    final Collection<OxServerClientID> targets)
   {
     final Collection<OxServerClient> notifyClients;
     synchronized (this.stateLock) {
@@ -493,7 +492,7 @@ public final class OxServerController implements OxServerControllerType
     }
   }
 
-  private List<UUID> clientsWatchingChannel(
+  private List<OxServerClientID> clientsWatchingChannel(
     final OxServerClient client,
     final OxChannelName channelName)
   {

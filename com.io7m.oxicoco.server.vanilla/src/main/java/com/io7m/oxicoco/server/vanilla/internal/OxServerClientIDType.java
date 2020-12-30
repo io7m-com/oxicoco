@@ -19,25 +19,43 @@ package com.io7m.oxicoco.server.vanilla.internal;
 import com.io7m.immutables.styles.ImmutablesStyleType;
 import org.immutables.value.Value;
 
-import java.util.Set;
-import java.util.UUID;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.util.Formattable;
+import java.util.Formatter;
 
 @ImmutablesStyleType
 @Value.Immutable
-public interface OxChannelJoinResultType
+public interface OxServerClientIDType extends Formattable
 {
-  OxServerClient client();
+  @Value.Parameter
+  int value();
 
-  OxChannel channel();
-
-  JoinStatus status();
-
-  Set<OxServerClientID> notifyUsers();
-
-  enum JoinStatus
+  @Override
+  default void formatTo(
+    final Formatter formatter,
+    final int flags,
+    final int width,
+    final int precision)
   {
-    CHANNEL_ALREADY_JOINED,
-    CHANNEL_JOINED_EXISTING,
-    CHANNEL_JOINED_CREATED
+    try {
+      formatter.out().append(this.format());
+    } catch (final IOException e) {
+      throw new UncheckedIOException(e);
+    }
+  }
+
+  default String format()
+  {
+    final var text =
+      Integer.toUnsignedString(this.value(), 16);
+    final var result =
+      new StringBuilder(8);
+
+    for (int index = 0; index < 8 - text.length(); ++index) {
+      result.append("0");
+    }
+    result.append(text);
+    return result.toString();
   }
 }

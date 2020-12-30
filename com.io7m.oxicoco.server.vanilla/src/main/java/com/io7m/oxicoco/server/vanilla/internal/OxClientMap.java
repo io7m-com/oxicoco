@@ -26,7 +26,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -35,23 +34,23 @@ public final class OxClientMap
   private static final Logger LOG =
     LoggerFactory.getLogger(OxClientMap.class);
 
-  private final HashMap<OxNickName, UUID> nickToId;
-  private final HashMap<UUID, OxNickName> idToNick;
-  private final HashMap<UUID, OxServerClient> clients;
-  private final Supplier<UUID> idSupplier;
+  private final HashMap<OxNickName, OxServerClientID> nickToId;
+  private final HashMap<OxServerClientID, OxNickName> idToNick;
+  private final HashMap<OxServerClientID, OxServerClient> clients;
+  private final Supplier<OxServerClientID> idSupplier;
 
   public OxClientMap(
-    final Supplier<UUID> inIdSupplier)
+    final Supplier<OxServerClientID> inIdSupplier)
   {
     this.idSupplier =
       Objects.requireNonNull(inIdSupplier, "idSupplier");
 
     this.clients = new HashMap<>();
-    this.nickToId = new HashMap<OxNickName, UUID>();
-    this.idToNick = new HashMap<UUID, OxNickName>();
+    this.nickToId = new HashMap<>();
+    this.idToNick = new HashMap<>();
   }
 
-  private UUID freshClientID()
+  private OxServerClientID freshClientID()
   {
     while (true) {
       final var id = this.idSupplier.get();
@@ -68,7 +67,7 @@ public final class OxClientMap
   }
 
   public OxServerClient clientCreate(
-    final Function<UUID, OxServerClient> creator)
+    final Function<OxServerClientID, OxServerClient> creator)
   {
     Objects.requireNonNull(creator, "creator");
 
@@ -79,7 +78,7 @@ public final class OxClientMap
   }
 
   public Optional<OxServerClient> clientOf(
-    final UUID id)
+    final OxServerClientID id)
   {
     Objects.requireNonNull(id, "id");
     return Optional.ofNullable(this.clients.get(id));

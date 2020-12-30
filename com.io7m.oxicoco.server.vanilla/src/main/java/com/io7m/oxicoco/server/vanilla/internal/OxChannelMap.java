@@ -35,8 +35,8 @@ import static com.io7m.oxicoco.server.vanilla.internal.OxChannelJoinResultType.J
 public final class OxChannelMap
 {
   private final TreeMap<OxChannelName, OxChannel> channels;
-  private final HashSetValuedHashMap<OxChannelName, UUID> channelToUsers;
-  private final HashSetValuedHashMap<UUID, OxChannelName> usersToChannel;
+  private final HashSetValuedHashMap<OxChannelName, OxServerClientID> channelToUsers;
+  private final HashSetValuedHashMap<OxServerClientID, OxChannelName> usersToChannel;
 
   public OxChannelMap()
   {
@@ -81,7 +81,7 @@ public final class OxChannelMap
     return result.build();
   }
 
-  public Set<UUID> channelClients(
+  public Set<OxServerClientID> channelClients(
     final OxChannelName channelName)
   {
     return this.channelToUsers.get(channelName);

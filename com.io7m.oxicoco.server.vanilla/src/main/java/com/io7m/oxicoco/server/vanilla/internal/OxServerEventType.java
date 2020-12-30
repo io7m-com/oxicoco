@@ -38,7 +38,7 @@ public interface OxServerEventType
   interface OxServerClientDestroyedType extends OxServerEventType
   {
     @Value.Parameter
-    UUID clientId();
+    OxServerClientID clientId();
   }
 
   @ImmutablesStyleType

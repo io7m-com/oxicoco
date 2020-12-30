@@ -55,7 +55,7 @@ public final class OxServerClient implements Closeable
     LoggerFactory.getLogger(OxServerClient.class);
 
   private final OxServerControllerType serverController;
-  private final UUID clientId;
+  private final OxServerClientID clientId;
   private final OxServerConfiguration configuration;
   private final Socket socket;
   private final SocketAddress address;
@@ -69,7 +69,7 @@ public final class OxServerClient implements Closeable
     final OxServerConfiguration inConfiguration,
     final OxIRCMessageParserFactoryType inParsers,
     final OxServerControllerType inServerController,
-    final UUID inClientId,
+    final OxServerClientID inClientId,
     final Socket inSocket)
   {
     this.serverController =
@@ -114,7 +114,7 @@ public final class OxServerClient implements Closeable
     this.socket.close();
   }
 
-  public UUID id()
+  public OxServerClientID id()
   {
     return this.clientId;
   }
@@ -355,7 +355,7 @@ public final class OxServerClient implements Closeable
 
   public String host()
   {
-    return this.clientId.toString();
+    return this.clientId.format();
   }
 
   public void enqueueMessage(

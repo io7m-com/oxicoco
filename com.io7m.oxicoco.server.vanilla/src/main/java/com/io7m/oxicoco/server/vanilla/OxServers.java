@@ -21,29 +21,45 @@ import com.io7m.oxicoco.server.api.OxServerConfiguration;
 import com.io7m.oxicoco.server.api.OxServerFactoryType;
 import com.io7m.oxicoco.server.api.OxServerType;
 import com.io7m.oxicoco.server.vanilla.internal.OxServer;
+import com.io7m.oxicoco.server.vanilla.internal.OxServerClientID;
 import com.io7m.oxicoco.server.vanilla.internal.OxServerController;
 
 import javax.net.ServerSocketFactory;
 import javax.net.ssl.SSLContext;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.time.Clock;
 import java.util.Objects;
-import java.util.UUID;
+import java.util.Random;
 import java.util.concurrent.Executors;
 
 public final class OxServers implements OxServerFactoryType
 {
   private final Clock clock;
+  private final Random random;
 
   public OxServers()
   {
-    this(Clock.systemUTC());
+    this(Clock.systemUTC(), defaultRandom());
   }
 
   public OxServers(
-    final Clock inClock)
+    final Clock inClock,
+    final Random inRandom)
   {
-    this.clock = Objects.requireNonNull(inClock, "clock");
+    this.clock =
+      Objects.requireNonNull(inClock, "clock");
+    this.random =
+      Objects.requireNonNull(inRandom, "random");
+  }
+
+  private static SecureRandom defaultRandom()
+  {
+    try {
+      return SecureRandom.getInstanceStrong();
+    } catch (final NoSuchAlgorithmException e) {
+      throw new IllegalStateException(e);
+    }
   }
 
   @Override
@@ -75,7 +91,7 @@ public final class OxServers implements OxServerFactoryType
           configuration,
           this.clock,
           new OxIRCMessageParsers(),
-          UUID::randomUUID
+          this::randomId
         );
       return new OxServer(
         serverMain,
@@ -88,5 +104,10 @@ public final class OxServers implements OxServerFactoryType
     } catch (final NoSuchAlgorithmException e) {
       throw new UnsupportedOperationException(e);
     }
+  }
+
+  private OxServerClientID randomId()
+  {
+    return OxServerClientID.of(this.random.nextInt());
   }
 }

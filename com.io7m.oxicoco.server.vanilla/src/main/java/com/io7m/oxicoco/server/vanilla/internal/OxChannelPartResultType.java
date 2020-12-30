@@ -32,5 +32,5 @@ public interface OxChannelPartResultType
 
   boolean parted();
 
-  Set<UUID> notifyUsers();
+  Set<OxServerClientID> notifyUsers();
 }

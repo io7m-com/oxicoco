@@ -19,6 +19,7 @@ package com.io7m.oxicoco.tests;
 import com.io7m.oxicoco.errors.OxIRCErrorChannelInvalid;
 import com.io7m.oxicoco.errors.OxIRCErrorChannelNonexistent;
 import com.io7m.oxicoco.errors.OxIRCErrorChannelNotIn;
+import com.io7m.oxicoco.errors.OxIRCErrorCommandUnknown;
 import com.io7m.oxicoco.errors.OxIRCErrorNeedMoreParameters;
 import com.io7m.oxicoco.errors.OxIRCErrorNickCollision;
 import com.io7m.oxicoco.errors.OxIRCErrorNickInvalid;
@@ -75,6 +76,7 @@ public final class OxEqualsTest
   public Stream<DynamicTest> testEquals()
   {
     return Stream.of(
+      OxIRCErrorCommandUnknown.class,
       OxIRCErrorChannelInvalid.class,
       OxIRCErrorChannelNonexistent.class,
       OxIRCErrorChannelNotIn.class,

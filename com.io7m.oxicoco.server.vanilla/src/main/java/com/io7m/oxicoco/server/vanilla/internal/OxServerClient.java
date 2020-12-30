@@ -16,6 +16,7 @@
 
 package com.io7m.oxicoco.server.vanilla.internal;
 
+import com.io7m.oxicoco.errors.OxIRCErrorCommandUnknown;
 import com.io7m.oxicoco.errors.OxIRCErrorType;
 import com.io7m.oxicoco.errors.OxIRCReply;
 import com.io7m.oxicoco.messages.OxIRCMessage;
@@ -90,18 +91,19 @@ public final class OxServerClient implements Closeable
 
     this.handlers =
       Map.ofEntries(
+        Map.entry("CAP", new OxServerClientCommandCAP()),
         Map.entry("JOIN", new OxServerClientCommandJOIN()),
         Map.entry("MODE", new OxServerClientCommandMODE()),
         Map.entry("MOTD", new OxServerClientCommandMOTD()),
         Map.entry("NICK", new OxServerClientCommandNICK()),
         Map.entry("PART", new OxServerClientCommandPART()),
         Map.entry("PING", new OxServerClientCommandPING()),
+        Map.entry("PRIVMSG", new OxServerClientCommandPRIVMSG()),
         Map.entry("QUIT", new OxServerClientCommandQUIT()),
         Map.entry("STATS", new OxServerClientCommandSTATS()),
         Map.entry("TOPIC", new OxServerClientCommandTOPIC()),
         Map.entry("USER", new OxServerClientCommandUSER()),
-        Map.entry("VERSION", new OxServerClientCommandVERSION()),
-        Map.entry("PRIVMSG", new OxServerClientCommandPRIVMSG())
+        Map.entry("VERSION", new OxServerClientCommandVERSION())
       );
   }
 
@@ -253,7 +255,7 @@ public final class OxServerClient implements Closeable
     if (handler != null) {
       handler.execute(this.context, lineWriter, message);
     } else {
-      this.error("unrecognized command: %s", message.command());
+      this.sendError(lineWriter, OxIRCErrorCommandUnknown.of(message.command()));
     }
   }
 

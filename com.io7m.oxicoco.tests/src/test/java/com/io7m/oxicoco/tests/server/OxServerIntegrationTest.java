@@ -1082,4 +1082,43 @@ public final class OxServerIntegrationTest
       );
     });
   }
+
+  @Test
+  public void testCAPTooFew()
+    throws IOException
+  {
+    send(this.outputWriterA, "CAP");
+    send(this.outputWriterA, "NICK x");
+    send(this.outputWriterA, "USER x x x :Unknown");
+
+    assertTimeout(Duration.ofSeconds(2L), () -> {
+      assertEquals(
+        ":com.example 461 :need more parameters",
+        this.inputReaderA.readLine()
+      );
+    });
+
+    assertTimeout(Duration.ofSeconds(2L), () -> {
+      assertEquals(
+        ":com.example 001 x",
+        this.inputReaderA.readLine()
+      );
+    });
+  }
+
+  @Test
+  public void testCAPOK()
+    throws IOException
+  {
+    send(this.outputWriterA, "CAP LS");
+    send(this.outputWriterA, "NICK x");
+    send(this.outputWriterA, "USER x x x :Unknown");
+
+    assertTimeout(Duration.ofSeconds(2L), () -> {
+      assertEquals(
+        ":com.example 001 x",
+        this.inputReaderA.readLine()
+      );
+    });
+  }
 }

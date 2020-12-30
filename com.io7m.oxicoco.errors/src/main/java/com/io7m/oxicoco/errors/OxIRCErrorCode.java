@@ -18,7 +18,6 @@ package com.io7m.oxicoco.errors;
 
 public enum OxIRCErrorCode
 {
-
   /**
    * ERR_NOSUCHNICK
    */

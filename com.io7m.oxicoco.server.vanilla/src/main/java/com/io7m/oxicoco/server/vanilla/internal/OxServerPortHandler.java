@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import javax.net.ServerSocketFactory;
 import java.io.Closeable;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
@@ -111,11 +112,13 @@ public final class OxServerPortHandler implements Closeable
   private ServerSocket createSocket()
     throws IOException
   {
-    return this.serverSockets.createServerSocket(
-      this.portConfiguration.port(),
-      10,
-      this.portConfiguration.address()
+    final var socket = this.serverSockets.createServerSocket();
+    socket.setReuseAddress(true);
+    socket.bind(new InetSocketAddress(
+      this.portConfiguration.address(),
+      this.portConfiguration.port())
     );
+    return socket;
   }
 
   @Override

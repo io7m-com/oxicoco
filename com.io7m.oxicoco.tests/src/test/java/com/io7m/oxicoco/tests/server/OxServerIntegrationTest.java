@@ -913,10 +913,13 @@ public final class OxServerIntegrationTest
     send(this.outputWriterA, "TOPIC #main");
 
     assertTimeout(Duration.ofSeconds(2L), () -> {
-      assertEquals(
-        ":com.example 332 x #main :New topic!",
-        this.inputReaderA.readLine()
-      );
+      while (true) {
+        final var line = this.inputReaderA.readLine();
+        LOG.debug("line: {}", line);
+        if (":com.example 332 x #main :New topic!".equals(line)) {
+          return;
+        }
+      }
     });
   }
 

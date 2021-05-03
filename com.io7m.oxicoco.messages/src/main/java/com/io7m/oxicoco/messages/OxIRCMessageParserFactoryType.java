@@ -16,7 +16,15 @@
 
 package com.io7m.oxicoco.messages;
 
+/**
+ * A factory of message parsers.
+ */
+
 public interface OxIRCMessageParserFactoryType
 {
+  /**
+   * @return A new message parser
+   */
+
   OxIRCMessageParserType create();
 }

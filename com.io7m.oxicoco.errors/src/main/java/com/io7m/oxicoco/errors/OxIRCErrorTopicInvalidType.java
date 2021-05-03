@@ -23,6 +23,10 @@ import org.immutables.value.Value;
 
 import java.util.Optional;
 
+/**
+ * An invalid topic was encountered.
+ */
+
 @ImmutablesStyleType
 @Value.Immutable
 public interface OxIRCErrorTopicInvalidType extends OxIRCErrorType

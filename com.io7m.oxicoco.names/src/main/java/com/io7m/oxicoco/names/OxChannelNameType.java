@@ -19,12 +19,24 @@ package com.io7m.oxicoco.names;
 import com.io7m.immutables.styles.ImmutablesStyleType;
 import org.immutables.value.Value;
 
+/**
+ * The type of channel names.
+ */
+
 @ImmutablesStyleType
 @Value.Immutable
 public interface OxChannelNameType extends Comparable<OxChannelNameType>
 {
+  /**
+   * @return The channel name
+   */
+
   @Value.Parameter
   String value();
+
+  /**
+   * Check preconditions for the type.
+   */
 
   @Value.Check
   default void checkPreconditions()

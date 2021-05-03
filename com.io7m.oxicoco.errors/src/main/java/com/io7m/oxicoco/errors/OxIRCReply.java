@@ -16,6 +16,10 @@
 
 package com.io7m.oxicoco.errors;
 
+/**
+ * The set of IRC replies.
+ */
+
 public enum OxIRCReply
 {
   /**
@@ -535,10 +539,18 @@ public enum OxIRCReply
     this.code = inCode;
   }
 
+  /**
+   * @return The error code integer
+   */
+
   public int code()
   {
     return this.code;
   }
+
+  /**
+   * @return The formatted error code
+   */
 
   public String format()
   {

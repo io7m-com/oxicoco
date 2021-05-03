@@ -19,7 +19,17 @@ package com.io7m.oxicoco.server.api;
 import java.io.Closeable;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * A server.
+ */
+
 public interface OxServerType extends Closeable
 {
+  /**
+   * Start the server.
+   *
+   * @return A future representing the server startup in progress
+   */
+
   CompletableFuture<Void> start();
 }

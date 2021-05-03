@@ -16,6 +16,10 @@
 
 package com.io7m.oxicoco.errors;
 
+/**
+ * The set of IRC error codes.
+ */
+
 public enum OxIRCErrorCode
 {
   /**
@@ -306,6 +310,10 @@ public enum OxIRCErrorCode
   {
     this.code = inCode;
   }
+
+  /**
+   * @return The integer error code
+   */
 
   public int code()
   {

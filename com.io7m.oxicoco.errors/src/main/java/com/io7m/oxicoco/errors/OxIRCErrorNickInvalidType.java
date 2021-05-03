@@ -23,6 +23,10 @@ import org.immutables.value.Value;
 
 import java.util.Optional;
 
+/**
+ * An invalid nickname was encountered.
+ */
+
 @ImmutablesStyleType
 @Value.Immutable
 public interface OxIRCErrorNickInvalidType extends OxIRCErrorType

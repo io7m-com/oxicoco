@@ -24,6 +24,10 @@ import org.immutables.value.Value;
 
 import java.util.Optional;
 
+/**
+ * A nickname collision occurred.
+ */
+
 @ImmutablesStyleType
 @Value.Immutable
 public interface OxIRCErrorNickCollisionType extends OxIRCErrorType
@@ -34,7 +38,15 @@ public interface OxIRCErrorNickCollisionType extends OxIRCErrorType
     return OxIRCErrorCode.ERR_NICKCOLLISION;
   }
 
+  /**
+   * @return The current nickname
+   */
+
   OxNickName current();
+
+  /**
+   * @return The requested nickname
+   */
 
   OxNickName requested();
 

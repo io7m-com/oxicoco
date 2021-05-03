@@ -21,9 +21,25 @@ import com.io7m.oxicoco.names.OxServerName;
 
 import java.util.Optional;
 
+/**
+ * The type of IRC errors.
+ */
+
 public interface OxIRCErrorType
 {
+  /**
+   * @return The IRC error code
+   */
+
   OxIRCErrorCode code();
+
+  /**
+   * Convert the error to a message.
+   *
+   * @param prefix The message prefix
+   *
+   * @return An IRC message
+   */
 
   OxIRCMessage toMessage(Optional<OxServerName> prefix);
 }

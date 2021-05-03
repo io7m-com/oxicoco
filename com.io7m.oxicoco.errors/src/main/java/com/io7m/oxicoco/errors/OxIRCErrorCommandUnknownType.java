@@ -23,6 +23,10 @@ import org.immutables.value.Value;
 
 import java.util.Optional;
 
+/**
+ * Unknown command!
+ */
+
 @ImmutablesStyleType
 @Value.Immutable
 public interface OxIRCErrorCommandUnknownType extends OxIRCErrorType
@@ -32,6 +36,10 @@ public interface OxIRCErrorCommandUnknownType extends OxIRCErrorType
   {
     return OxIRCErrorCode.ERR_UNKNOWNCOMMAND;
   }
+
+  /**
+   * @return The command name
+   */
 
   @Value.Parameter
   String commandName();

@@ -16,8 +16,20 @@
 
 package com.io7m.oxicoco.server.api;
 
+/**
+ * A provider of servers.
+ */
+
 public interface OxServerFactoryType
 {
+  /**
+   * Construct a server.
+   *
+   * @param configuration The configuration
+   *
+   * @return A server
+   */
+
   OxServerType create(
     OxServerConfiguration configuration);
 }

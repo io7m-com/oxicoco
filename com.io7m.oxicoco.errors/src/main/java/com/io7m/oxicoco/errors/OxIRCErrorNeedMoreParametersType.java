@@ -23,6 +23,10 @@ import org.immutables.value.Value;
 
 import java.util.Optional;
 
+/**
+ * More parameters are required.
+ */
+
 @ImmutablesStyleType
 @Value.Immutable
 public interface OxIRCErrorNeedMoreParametersType extends OxIRCErrorType

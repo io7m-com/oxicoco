@@ -23,6 +23,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * An IRC message.
+ */
+
 @ImmutablesStyleType
 @Value.Immutable
 public interface OxIRCMessageType
@@ -38,17 +42,45 @@ public interface OxIRCMessageType
     return String.format("%s=%s", key, val);
   }
 
+  /**
+   * @return The raw message text
+   */
+
   String rawText();
+
+  /**
+   * @return The message tags
+   */
 
   Map<String, String> tags();
 
+  /**
+   * @return The message prefix
+   */
+
   String prefix();
+
+  /**
+   * @return The message command
+   */
 
   String command();
 
+  /**
+   * @return The message parameters
+   */
+
   List<String> parameters();
 
+  /**
+   * @return The message trailing text
+   */
+
   String trailing();
+
+  /**
+   * @return The formatted message
+   */
 
   default String format()
   {

@@ -20,8 +20,16 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * A factory of message parsers.
+ */
+
 public final class OxIRCMessageParsers implements OxIRCMessageParserFactoryType
 {
+  /**
+   * A factory of message parsers.
+   */
+
   public OxIRCMessageParsers()
   {
 
@@ -92,7 +100,9 @@ public final class OxIRCMessageParsers implements OxIRCMessageParserFactoryType
 
       final var text = line.substring(0, end);
       messageBuilder.addParameters(text);
-      return this.consumeParameters(messageBuilder, line.substring(end).stripLeading());
+      return this.consumeParameters(
+        messageBuilder,
+        line.substring(end).stripLeading());
     }
 
     private String consumeTrailing(

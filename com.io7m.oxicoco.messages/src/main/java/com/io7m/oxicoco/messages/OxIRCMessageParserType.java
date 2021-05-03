@@ -18,7 +18,19 @@ package com.io7m.oxicoco.messages;
 
 import java.util.Optional;
 
+/**
+ * The type of message parsers.
+ */
+
 public interface OxIRCMessageParserType
 {
+  /**
+   * Parse a message.
+   *
+   * @param line The input line
+   *
+   * @return A parsed message, if one could be parsed
+   */
+
   Optional<OxIRCMessage> parse(String line);
 }

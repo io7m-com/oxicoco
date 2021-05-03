@@ -23,6 +23,10 @@ import org.immutables.value.Value;
 
 import java.util.Optional;
 
+/**
+ * A channel does not exist.
+ */
+
 @ImmutablesStyleType
 @Value.Immutable
 public interface OxIRCErrorChannelNonexistentType extends OxIRCErrorType

@@ -21,13 +21,29 @@ import org.immutables.value.Value;
 
 import java.net.InetAddress;
 
+/**
+ * Configuration for a single server port.
+ */
+
 @ImmutablesStyleType
 @Value.Immutable
 public interface OxServerPortConfigurationType
 {
+  /**
+   * @return The address to which to bind
+   */
+
   InetAddress address();
 
+  /**
+   * @return The port to which to bind
+   */
+
   int port();
+
+  /**
+   * @return {@code true} if TLS should be enabled
+   */
 
   boolean enableTLS();
 }

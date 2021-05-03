@@ -23,6 +23,10 @@ import org.immutables.value.Value;
 
 import java.util.Optional;
 
+/**
+ * An invalid username was encountered.
+ */
+
 @ImmutablesStyleType
 @Value.Immutable
 public interface OxIRCErrorUserInvalidType extends OxIRCErrorType

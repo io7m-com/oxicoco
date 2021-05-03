@@ -23,6 +23,10 @@ import org.immutables.value.Value;
 
 import java.util.Optional;
 
+/**
+ * An invalid channel name was encountered.
+ */
+
 @ImmutablesStyleType
 @Value.Immutable
 public interface OxIRCErrorChannelInvalidType extends OxIRCErrorType

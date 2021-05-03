@@ -24,19 +24,39 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+/**
+ * The server configuration.
+ */
+
 @ImmutablesStyleType
 @Value.Immutable
 public interface OxServerConfigurationType
 {
+  /**
+   * @return The server name
+   */
+
   OxServerName serverName();
 
+  /**
+   * @return The server port configurations
+   */
+
   List<OxServerPortConfiguration> ports();
+
+  /**
+   * @return The server MOTD supplier
+   */
 
   @Value.Default
   default Supplier<List<String>> motd()
   {
     return List::of;
   }
+
+  /**
+   * @return The server banner
+   */
 
   Optional<String> banner();
 }

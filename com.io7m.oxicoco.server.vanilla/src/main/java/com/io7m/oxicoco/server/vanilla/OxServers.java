@@ -33,15 +33,30 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.Executors;
 
+/**
+ * The default provider of servers.
+ */
+
 public final class OxServers implements OxServerFactoryType
 {
   private final Clock clock;
   private final Random random;
 
+  /**
+   * The default provider of servers.
+   */
+
   public OxServers()
   {
     this(Clock.systemUTC(), defaultRandom());
   }
+
+  /**
+   * The default provider of servers.
+   *
+   * @param inClock  A clock used to track time
+   * @param inRandom A random number generator
+   */
 
   public OxServers(
     final Clock inClock,

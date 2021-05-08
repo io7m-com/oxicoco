@@ -18,14 +18,21 @@ package com.io7m.oxicoco.server.vanilla.internal;
 
 import com.io7m.oxicoco.messages.OxIRCMessage;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 
 import static com.io7m.oxicoco.errors.OxIRCReply.RPL_VERSION;
 
+/**
+ * The VERSION command.
+ */
+
 public final class OxServerClientCommandVERSION
   implements OxServerClientCommandHandlerType
 {
+  /**
+   * The VERSION command.
+   */
+
   public OxServerClientCommandVERSION()
   {
 
@@ -34,7 +41,6 @@ public final class OxServerClientCommandVERSION
   @Override
   public void execute(
     final OxServerClientCommandContextType context,
-    final BufferedWriter lineWriter,
     final OxIRCMessage message)
     throws IOException
   {

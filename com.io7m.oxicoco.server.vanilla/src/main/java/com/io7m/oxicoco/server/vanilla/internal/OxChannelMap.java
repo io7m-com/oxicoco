@@ -31,11 +31,20 @@ import static com.io7m.oxicoco.server.vanilla.internal.OxChannelJoinResultType.J
 import static com.io7m.oxicoco.server.vanilla.internal.OxChannelJoinResultType.JoinStatus.CHANNEL_JOINED_CREATED;
 import static com.io7m.oxicoco.server.vanilla.internal.OxChannelJoinResultType.JoinStatus.CHANNEL_JOINED_EXISTING;
 
+/**
+ * A map of channels that preserves the various invariants required by an IRC
+ * server.
+ */
+
 public final class OxChannelMap
 {
   private final TreeMap<OxChannelName, OxChannel> channels;
   private final HashSetValuedHashMap<OxChannelName, OxServerClientID> channelToUsers;
   private final HashSetValuedHashMap<OxServerClientID, OxChannelName> usersToChannel;
+
+  /**
+   * Create an empty channel map.
+   */
 
   public OxChannelMap()
   {
@@ -46,6 +55,16 @@ public final class OxChannelMap
     this.usersToChannel =
       new HashSetValuedHashMap<>();
   }
+
+  /**
+   * Join a client to the given channel.
+   *
+   * @param client          The client
+   * @param channelName     The name of the channel
+   * @param channelSupplier A creator of channels
+   *
+   * @return The result of attempting to join
+   */
 
   public OxChannelJoinResult channelJoin(
     final OxServerClient client,
@@ -80,11 +99,28 @@ public final class OxChannelMap
     return result.build();
   }
 
+  /**
+   * @param channelName The channel name
+   *
+   * @return The set of clients present in the channel
+   */
+
   public Set<OxServerClientID> channelClients(
     final OxChannelName channelName)
   {
     return this.channelToUsers.get(channelName);
   }
+
+  /**
+   * Part a client from the given channel.
+   *
+   * @param client      The client
+   * @param channelName The name of the channel
+   *
+   * @return The result of attempting to part
+   *
+   * @throws OxClientException On errors
+   */
 
   public OxChannelPartResult channelPart(
     final OxServerClient client,
@@ -114,6 +150,12 @@ public final class OxChannelMap
     return result.build();
   }
 
+  /**
+   * @param channelName The channel name
+   *
+   * @return The topic of the given channel
+   */
+
   public OxTopic channelTopic(
     final OxChannelName channelName)
   {
@@ -123,6 +165,17 @@ public final class OxChannelMap
     }
     return existing.topic();
   }
+
+  /**
+   * Set the topic for the given channel.
+   *
+   * @param channelName The channel name
+   * @param newTopic    The new topic
+   *
+   * @return The channel
+   *
+   * @throws OxClientException On errors
+   */
 
   public OxChannel channelTopicSet(
     final OxChannelName channelName,
@@ -138,16 +191,32 @@ public final class OxChannelMap
     return existing;
   }
 
+  /**
+   * @return The number of channels present
+   */
+
   public int channelCount()
   {
     return this.channels.size();
   }
+
+  /**
+   * @param client The client
+   *
+   * @return The set of channels to which the client is joined
+   */
 
   public Set<OxChannelName> channelsFor(
     final OxServerClient client)
   {
     return this.usersToChannel.get(client.id());
   }
+
+  /**
+   * @param channelName The channel name
+   *
+   * @return The channel with the given name
+   */
 
   public Optional<OxChannel> channelOf(
     final OxChannelName channelName)

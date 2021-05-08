@@ -20,16 +20,23 @@ import com.io7m.oxicoco.errors.OxIRCErrorNickInvalid;
 import com.io7m.oxicoco.messages.OxIRCMessage;
 import com.io7m.oxicoco.names.OxNickName;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 import static com.io7m.oxicoco.errors.OxIRCReply.RPL_WELCOME;
 
+/**
+ * The NICK command.
+ */
+
 public final class OxServerClientCommandNICK
   implements OxServerClientCommandHandlerType
 {
+  /**
+   * The NICK command.
+   */
+
   public OxServerClientCommandNICK()
   {
 
@@ -38,7 +45,6 @@ public final class OxServerClientCommandNICK
   @Override
   public void execute(
     final OxServerClientCommandContextType context,
-    final BufferedWriter lineWriter,
     final OxIRCMessage message)
     throws IOException
   {

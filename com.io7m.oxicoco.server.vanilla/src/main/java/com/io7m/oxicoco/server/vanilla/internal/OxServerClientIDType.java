@@ -24,10 +24,18 @@ import java.io.UncheckedIOException;
 import java.util.Formattable;
 import java.util.Formatter;
 
+/**
+ * The identity of a client on the server.
+ */
+
 @ImmutablesStyleType
 @Value.Immutable
 public interface OxServerClientIDType extends Formattable
 {
+  /**
+   * @return The identity value
+   */
+
   @Value.Parameter
   int value();
 
@@ -44,6 +52,10 @@ public interface OxServerClientIDType extends Formattable
       throw new UncheckedIOException(e);
     }
   }
+
+  /**
+   * @return The identity formatted as a string
+   */
 
   default String format()
   {

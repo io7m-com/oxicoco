@@ -21,22 +21,60 @@ import org.immutables.value.Value;
 
 import java.util.Set;
 
+/**
+ * The result of joining a channel.
+ */
+
 @ImmutablesStyleType
 @Value.Immutable
 public interface OxChannelJoinResultType
 {
+  /**
+   * @return The client
+   */
+
   OxServerClient client();
+
+  /**
+   * @return The channel
+   */
 
   OxChannel channel();
 
+  /**
+   * @return The join status
+   */
+
   JoinStatus status();
+
+  /**
+   * @return The set of users that should be notified
+   */
 
   Set<OxServerClientID> notifyUsers();
 
+  /**
+   * The different types of join status.
+   */
+
   enum JoinStatus
   {
+    /**
+     * The user was already joined to the channel.
+     */
+
     CHANNEL_ALREADY_JOINED,
+
+    /**
+     * The user joined an existing channel.
+     */
+
     CHANNEL_JOINED_EXISTING,
+
+    /**
+     * The user created a channel by joining it.
+     */
+
     CHANNEL_JOINED_CREATED
   }
 }

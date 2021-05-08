@@ -20,12 +20,19 @@ import com.io7m.oxicoco.errors.OxIRCErrorUserInvalid;
 import com.io7m.oxicoco.messages.OxIRCMessage;
 import com.io7m.oxicoco.names.OxUserName;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
+
+/**
+ * The USER command.
+ */
 
 public final class OxServerClientCommandUSER
   implements OxServerClientCommandHandlerType
 {
+  /**
+   * The USER command.
+   */
+
   public OxServerClientCommandUSER()
   {
 
@@ -34,7 +41,6 @@ public final class OxServerClientCommandUSER
   @Override
   public void execute(
     final OxServerClientCommandContextType context,
-    final BufferedWriter lineWriter,
     final OxIRCMessage message)
     throws IOException
   {

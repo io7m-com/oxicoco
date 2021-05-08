@@ -21,15 +21,35 @@ import org.immutables.value.Value;
 
 import java.util.Set;
 
+/**
+ * The result of parting a channel.
+ */
+
 @ImmutablesStyleType
 @Value.Immutable
 public interface OxChannelPartResultType
 {
+  /**
+   * @return The client
+   */
+
   OxServerClient client();
+
+  /**
+   * @return The channel
+   */
 
   OxChannel channel();
 
+  /**
+   * @return {@code true} if the parting occurred
+   */
+
   boolean parted();
+
+  /**
+   * @return The set of users that should be notified
+   */
 
   Set<OxServerClientID> notifyUsers();
 }

@@ -21,7 +21,6 @@ import com.io7m.oxicoco.errors.OxIRCErrorNeedMoreParameters;
 import com.io7m.oxicoco.messages.OxIRCMessage;
 import com.io7m.oxicoco.names.OxChannelName;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,9 +29,17 @@ import static com.io7m.oxicoco.errors.OxIRCReply.RPL_ENDOFNAMES;
 import static com.io7m.oxicoco.errors.OxIRCReply.RPL_NAMREPLY;
 import static com.io7m.oxicoco.errors.OxIRCReply.RPL_TOPIC;
 
+/**
+ * The JOIN command.
+ */
+
 public final class OxServerClientCommandJOIN
   implements OxServerClientCommandHandlerType
 {
+  /**
+   * The JOIN command.
+   */
+
   public OxServerClientCommandJOIN()
   {
 
@@ -41,7 +48,6 @@ public final class OxServerClientCommandJOIN
   @Override
   public void execute(
     final OxServerClientCommandContextType context,
-    final BufferedWriter lineWriter,
     final OxIRCMessage message)
     throws IOException
   {

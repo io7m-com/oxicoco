@@ -18,16 +18,23 @@ package com.io7m.oxicoco.server.vanilla.internal;
 
 import com.io7m.oxicoco.messages.OxIRCMessage;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 
 import static com.io7m.oxicoco.errors.OxIRCReply.RPL_ENDOFSTATS;
 import static com.io7m.oxicoco.errors.OxIRCReply.RPL_STATSGENERIC;
 import static com.io7m.oxicoco.errors.OxIRCReply.RPL_STATSUPTIME;
 
+/**
+ * The STATS command.
+ */
+
 public final class OxServerClientCommandSTATS
   implements OxServerClientCommandHandlerType
 {
+  /**
+   * The STATS command.
+   */
+
   public OxServerClientCommandSTATS()
   {
 
@@ -59,7 +66,6 @@ public final class OxServerClientCommandSTATS
   @Override
   public void execute(
     final OxServerClientCommandContextType context,
-    final BufferedWriter lineWriter,
     final OxIRCMessage message)
     throws IOException
   {

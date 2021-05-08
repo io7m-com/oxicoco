@@ -21,13 +21,20 @@ import com.io7m.oxicoco.errors.OxIRCErrorNeedMoreParameters;
 import com.io7m.oxicoco.messages.OxIRCMessage;
 import com.io7m.oxicoco.names.OxChannelName;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.List;
+
+/**
+ * The PART command.
+ */
 
 public final class OxServerClientCommandPART
   implements OxServerClientCommandHandlerType
 {
+  /**
+   * The PART command.
+   */
+
   public OxServerClientCommandPART()
   {
 
@@ -36,7 +43,6 @@ public final class OxServerClientCommandPART
   @Override
   public void execute(
     final OxServerClientCommandContextType context,
-    final BufferedWriter lineWriter,
     final OxIRCMessage message)
     throws IOException
   {

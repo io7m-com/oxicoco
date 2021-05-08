@@ -18,8 +18,18 @@ package com.io7m.oxicoco.server.vanilla.internal;
 
 import java.util.Objects;
 
+/**
+ * An operation occurred before a name was registered.
+ */
+
 public final class OxNameNotRegisteredException extends Exception
 {
+  /**
+   * An operation occurred before a name was registered.
+   *
+   * @param message The message
+   */
+
   public OxNameNotRegisteredException(
     final String message)
   {

@@ -27,42 +27,138 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The internal server controller.
+ */
+
 public interface OxServerControllerType extends Closeable
 {
+  /**
+   * @return An observable stream of server events
+   */
+
   Observable<OxServerEventType> events();
+
+  /**
+   * Create a new client for the given socket.
+   *
+   * @param socket The socket
+   *
+   * @return A new client
+   */
 
   OxServerClient clientCreate(Socket socket);
 
+  /**
+   * @return The server uptime
+   */
+
   Duration uptime();
+
+  /**
+   * Set the nickname of the given client.
+   *
+   * @param client The client
+   * @param name   The nickname
+   *
+   * @return The new nickname
+   *
+   * @throws OxClientException On errors
+   */
 
   Optional<OxNickName> clientSetNick(
     OxServerClient client,
     OxNickName name)
     throws OxClientException;
 
+  /**
+   * Destroy (disconnect) the given client.
+   *
+   * @param client The client
+   */
+
   void clientDestroy(OxServerClient client);
+
+  /**
+   * @param client The client
+   *
+   * @return The nick for the given client
+   *
+   * @throws OxNameNotRegisteredException If the client is not registered
+   */
 
   OxNickName clientNick(OxServerClient client)
     throws OxNameNotRegisteredException;
 
+  /**
+   * @param client The client
+   *
+   * @return The user ID for the given client
+   *
+   * @throws OxNameNotRegisteredException If the client is not registered
+   */
+
   OxUserID clientUserId(OxServerClient client)
     throws OxNameNotRegisteredException;
+
+  /**
+   * Join the client to the channel with the given name.
+   *
+   * @param client      The client
+   * @param channelName The channel name
+   *
+   * @return The result of joining
+   */
 
   OxChannelJoinResult channelJoin(
     OxServerClient client,
     OxChannelName channelName);
 
+  /**
+   * @param channelName The channel name
+   *
+   * @return The list of nicks present in the channel
+   */
+
   List<OxNickName> channelNicks(
     OxChannelName channelName);
+
+  /**
+   * Part the client from the channel with the given name.
+   *
+   * @param client      The client
+   * @param channelName The channel name
+   *
+   * @return The result of parting
+   *
+   * @throws OxClientException On errors
+   */
 
   OxChannelPartResult channelPart(
     OxServerClient client,
     OxChannelName channelName)
     throws OxClientException;
 
+  /**
+   * @param client      The client
+   * @param channelName The channel name
+   *
+   * @return The topic for the given channel
+   */
+
   OxTopic channelGetTopic(
     OxServerClient client,
     OxChannelName channelName);
+
+  /**
+   * Set the topic for the given channel.
+   *
+   * @param client      The client
+   * @param channelName The channel name
+   * @param newTopic    The new topic
+   *
+   * @throws OxClientException On errors
+   */
 
   void channelSetTopic(
     OxServerClient client,
@@ -70,15 +166,43 @@ public interface OxServerControllerType extends Closeable
     OxTopic newTopic)
     throws OxClientException;
 
+  /**
+   * @return The number of connected clients
+   */
+
   int clientCount();
 
+  /**
+   * @return The number of channels present
+   */
+
   int channelCount();
+
+  /**
+   * Send a channel message.
+   *
+   * @param client      The client
+   * @param channelName The target channel
+   * @param message     The message
+   *
+   * @throws OxClientException On errors
+   */
 
   void channelMessage(
     OxServerClient client,
     OxChannelName channelName,
     String message)
     throws OxClientException;
+
+  /**
+   * Send a client message.
+   *
+   * @param client   The client
+   * @param nickName The target nick
+   * @param message  The message
+   *
+   * @throws OxClientException On errors
+   */
 
   void clientMessage(
     OxServerClient client,

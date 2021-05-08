@@ -23,15 +23,22 @@ import com.io7m.oxicoco.messages.OxIRCMessage;
 import com.io7m.oxicoco.names.OxChannelName;
 import com.io7m.oxicoco.names.OxTopic;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.List;
 
 import static com.io7m.oxicoco.errors.OxIRCReply.RPL_TOPIC;
 
+/**
+ * The TOPIC command.
+ */
+
 public final class OxServerClientCommandTOPIC
   implements OxServerClientCommandHandlerType
 {
+  /**
+   * The TOPIC command.
+   */
+
   public OxServerClientCommandTOPIC()
   {
 
@@ -88,7 +95,6 @@ public final class OxServerClientCommandTOPIC
   @Override
   public void execute(
     final OxServerClientCommandContextType context,
-    final BufferedWriter lineWriter,
     final OxIRCMessage message)
     throws IOException
   {

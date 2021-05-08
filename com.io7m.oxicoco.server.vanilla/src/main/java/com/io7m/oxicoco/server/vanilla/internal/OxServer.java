@@ -32,6 +32,10 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
 
+/**
+ * The base server implementation.
+ */
+
 public final class OxServer implements OxServerType
 {
   private static final Logger LOG =
@@ -45,6 +49,17 @@ public final class OxServer implements OxServerType
   private final OxServerConfiguration configuration;
   private final List<OxServerPortHandler> portHandlers;
   private final CompositeDisposable subscriptions;
+
+  /**
+   * The base server implementation.
+   *
+   * @param inServerMain       The main server executor
+   * @param inServerClients    The executor used for clients
+   * @param inServerSockets    The socket factory for clients
+   * @param inSSLServerSockets The SSL socket factory
+   * @param inServerController The main server controller
+   * @param inConfiguration    The server configuration
+   */
 
   public OxServer(
     final ExecutorService inServerMain,

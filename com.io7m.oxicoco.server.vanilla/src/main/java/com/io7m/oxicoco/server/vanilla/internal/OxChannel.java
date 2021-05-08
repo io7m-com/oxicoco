@@ -23,11 +23,22 @@ import com.io7m.oxicoco.names.OxTopic;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * A channel on the server.
+ */
+
 public final class OxChannel
 {
   private final OxServerControllerType controller;
   private final OxChannelName name;
   private volatile OxTopic topic;
+
+  /**
+   * A channel on the server.
+   *
+   * @param inController The server controller
+   * @param inName       The channel name
+   */
 
   public OxChannel(
     final OxServerControllerType inController,
@@ -41,20 +52,38 @@ public final class OxChannel
       OxTopic.of("");
   }
 
+  /**
+   * @return The channel name
+   */
+
   public OxChannelName name()
   {
     return this.name;
   }
+
+  /**
+   * @return The list of nicks in the channel
+   */
 
   public List<OxNickName> nicks()
   {
     return this.controller.channelNicks(this.name);
   }
 
+  /**
+   * @return The channel topic
+   */
+
   public OxTopic topic()
   {
     return this.topic;
   }
+
+  /**
+   * Set the channel topic.
+   *
+   * @param newTopic The new topic
+   */
 
   public void setTopic(
     final OxTopic newTopic)

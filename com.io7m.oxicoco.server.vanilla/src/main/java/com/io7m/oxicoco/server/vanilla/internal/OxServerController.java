@@ -44,6 +44,10 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * The server controller implementation.
+ */
+
 public final class OxServerController implements OxServerControllerType
 {
   private static final Logger LOG =
@@ -62,6 +66,15 @@ public final class OxServerController implements OxServerControllerType
   private final OxClientMap clientMap;
   @GuardedBy("stateLock")
   private final OxChannelMap channelMap;
+
+  /**
+   * The server controller implementation.
+   *
+   * @param inConfiguration The server configuration
+   * @param inClock         A clock used for various time-based operations
+   * @param inParsers       The message parsers
+   * @param inIdSupplier    A supplier of client IDs
+   */
 
   public OxServerController(
     final OxServerConfiguration inConfiguration,

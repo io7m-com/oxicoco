@@ -48,6 +48,10 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+/**
+ * A single client connected to the server.
+ */
+
 public final class OxServerClient implements Closeable
 {
   private static final Logger LOG =
@@ -63,6 +67,16 @@ public final class OxServerClient implements Closeable
   private final ConcurrentLinkedQueue<OxIRCMessage> serverMessages;
   private OxServerClientCommandContextType context;
   private volatile OxUserName user;
+
+  /**
+   * A single client connected to the server.
+   *
+   * @param inConfiguration    The server configuration
+   * @param inParsers          A message parser factory
+   * @param inServerController The server controller
+   * @param inClientId         The client ID
+   * @param inSocket           The client socket
+   */
 
   public OxServerClient(
     final OxServerConfiguration inConfiguration,
@@ -113,10 +127,18 @@ public final class OxServerClient implements Closeable
     this.socket.close();
   }
 
+  /**
+   * @return The client ID
+   */
+
   public OxServerClientID id()
   {
     return this.clientId;
   }
+
+  /**
+   * Start executing the client, returning when the client disconnects.
+   */
 
   public void run()
   {
@@ -252,7 +274,7 @@ public final class OxServerClient implements Closeable
   {
     final var handler = this.handlers.get(message.command());
     if (handler != null) {
-      handler.execute(this.context, lineWriter, message);
+      handler.execute(this.context, message);
     } else {
       this.sendError(
         lineWriter,
@@ -337,11 +359,23 @@ public final class OxServerClient implements Closeable
     this.sendMessage(lineWriter, builder.build());
   }
 
+  /**
+   * @return The client nick name
+   *
+   * @throws OxNameNotRegisteredException If the client has not specified a nick
+   */
+
   public OxNickName nick()
     throws OxNameNotRegisteredException
   {
     return this.serverController.clientNick(this);
   }
+
+  /**
+   * @return The client user ID
+   *
+   * @throws OxNameNotRegisteredException If the client has not specified a nick
+   */
 
   public OxUserID userId()
     throws OxNameNotRegisteredException
@@ -349,21 +383,41 @@ public final class OxServerClient implements Closeable
     return this.serverController.clientUserId(this);
   }
 
+  /**
+   * @return The client user name
+   */
+
   public OxUserName user()
   {
     return this.user;
   }
+
+  /**
+   * @return The client host
+   */
 
   public String host()
   {
     return this.clientId.format();
   }
 
+  /**
+   * Enqueue a message to the client.
+   *
+   * @param message The message
+   */
+
   public void enqueueMessage(
     final OxIRCMessage message)
   {
     this.serverMessages.add(message);
   }
+
+  /**
+   * Set the client user name.
+   *
+   * @param name The name
+   */
 
   public void setUser(
     final OxUserName name)
@@ -427,13 +481,6 @@ public final class OxServerClient implements Closeable
     }
 
     @Override
-    public OxUserID userId()
-      throws OxNameNotRegisteredException
-    {
-      return this.client.userId();
-    }
-
-    @Override
     public OxServerControllerType serverController()
     {
       return this.client.serverController;
@@ -459,13 +506,6 @@ public final class OxServerClient implements Closeable
     public OxServerConfiguration configuration()
     {
       return this.client.configuration;
-    }
-
-    @Override
-    public OxNickName nick()
-      throws OxNameNotRegisteredException
-    {
-      return this.client.nick();
     }
 
     @Override

@@ -22,56 +22,124 @@ import org.immutables.value.Value;
 
 import java.util.Optional;
 
+/**
+ * The type of server events.
+ */
+
 public interface OxServerEventType
 {
+  /**
+   * A client was created.
+   */
+
   @ImmutablesStyleType
   @Value.Immutable
   interface OxServerClientCreatedType extends OxServerEventType
   {
+    /**
+     * @return The client
+     */
+
     @Value.Parameter
     OxServerClient client();
   }
+
+  /**
+   * A client was destroyed.
+   */
 
   @ImmutablesStyleType
   @Value.Immutable
   interface OxServerClientDestroyedType extends OxServerEventType
   {
+    /**
+     * @return The client
+     */
+
     @Value.Parameter
     OxServerClientID clientId();
   }
+
+  /**
+   * A client nickname was changed.
+   */
 
   @ImmutablesStyleType
   @Value.Immutable
   interface OxServerClientNickChangedType extends OxServerEventType
   {
+    /**
+     * @return The client
+     */
+
     OxServerClient client();
+
+    /**
+     * @return The old name if there was one
+     */
 
     Optional<OxNickName> oldName();
 
+    /**
+     * @return The new name
+     */
+
     OxNickName newName();
   }
+
+  /**
+   * A channel was created.
+   */
 
   @ImmutablesStyleType
   @Value.Immutable
   interface OxServerChannelCreatedType extends OxServerEventType
   {
+    /**
+     * @return The channel
+     */
+
     OxChannel channel();
   }
+
+  /**
+   * A client joined a channel.
+   */
 
   @ImmutablesStyleType
   @Value.Immutable
   interface OxServerChannelJoinedType extends OxServerEventType
   {
+    /**
+     * @return The client
+     */
+
     OxServerClient client();
+
+    /**
+     * @return The channel
+     */
 
     OxChannel channel();
   }
+
+  /**
+   * A client left a channel.
+   */
 
   @ImmutablesStyleType
   @Value.Immutable
   interface OxServerChannelPartedType extends OxServerEventType
   {
+    /**
+     * @return The client
+     */
+
     OxServerClient client();
+
+    /**
+     * @return The channel
+     */
 
     OxChannel channel();
   }

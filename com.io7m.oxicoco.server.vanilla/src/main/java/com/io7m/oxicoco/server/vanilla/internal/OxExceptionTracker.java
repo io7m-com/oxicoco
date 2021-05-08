@@ -18,14 +18,30 @@ package com.io7m.oxicoco.server.vanilla.internal;
 
 import java.util.Objects;
 
+/**
+ * A class that tracks exceptions.
+ *
+ * @param <T> The type of exceptions raised
+ */
+
 public final class OxExceptionTracker<T extends Exception>
 {
   private T exception;
+
+  /**
+   * A class that tracks exceptions.
+   */
 
   public OxExceptionTracker()
   {
 
   }
+
+  /**
+   * Add an exception to the tracker.
+   *
+   * @param nextException The exception
+   */
 
   public void addException(
     final T nextException)
@@ -38,6 +54,13 @@ public final class OxExceptionTracker<T extends Exception>
       this.exception.addSuppressed(nextException);
     }
   }
+
+  /**
+   * Throw an exception of {@link #addException(Exception)} has been called
+   * at least once.
+   *
+   * @throws T If required
+   */
 
   public void throwIfNecessary()
     throws T

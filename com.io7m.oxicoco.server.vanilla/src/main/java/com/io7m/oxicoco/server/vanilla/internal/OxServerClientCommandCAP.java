@@ -19,12 +19,19 @@ package com.io7m.oxicoco.server.vanilla.internal;
 import com.io7m.oxicoco.errors.OxIRCErrorNeedMoreParameters;
 import com.io7m.oxicoco.messages.OxIRCMessage;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
+
+/**
+ * The CAP command.
+ */
 
 public final class OxServerClientCommandCAP
   implements OxServerClientCommandHandlerType
 {
+  /**
+   * The CAP command.
+   */
+
   public OxServerClientCommandCAP()
   {
 
@@ -33,7 +40,6 @@ public final class OxServerClientCommandCAP
   @Override
   public void execute(
     final OxServerClientCommandContextType context,
-    final BufferedWriter lineWriter,
     final OxIRCMessage message)
     throws IOException
   {

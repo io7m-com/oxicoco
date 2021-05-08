@@ -20,15 +20,29 @@ import com.io7m.oxicoco.errors.OxIRCErrorType;
 
 import java.util.Objects;
 
+/**
+ * The type of errors caused by clients.
+ */
+
 public final class OxClientException extends Exception
 {
   private final OxIRCErrorType error;
+
+  /**
+   * The type of errors caused by clients.
+   *
+   * @param inError The error code
+   */
 
   public OxClientException(
     final OxIRCErrorType inError)
   {
     this.error = Objects.requireNonNull(inError, "error");
   }
+
+  /**
+   * @return The error code
+   */
 
   public OxIRCErrorType error()
   {

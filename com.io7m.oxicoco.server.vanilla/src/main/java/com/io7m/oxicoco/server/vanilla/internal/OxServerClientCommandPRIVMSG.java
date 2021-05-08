@@ -23,12 +23,19 @@ import com.io7m.oxicoco.messages.OxIRCMessage;
 import com.io7m.oxicoco.names.OxChannelName;
 import com.io7m.oxicoco.names.OxNickName;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
+
+/**
+ * The PRIVMSG command.
+ */
 
 public final class OxServerClientCommandPRIVMSG
   implements OxServerClientCommandHandlerType
 {
+  /**
+   * The PRIVMSG command.
+   */
+
   public OxServerClientCommandPRIVMSG()
   {
 
@@ -37,7 +44,6 @@ public final class OxServerClientCommandPRIVMSG
   @Override
   public void execute(
     final OxServerClientCommandContextType context,
-    final BufferedWriter lineWriter,
     final OxIRCMessage message)
     throws IOException
   {
@@ -49,7 +55,7 @@ public final class OxServerClientCommandPRIVMSG
 
     final var target = parameters.get(0);
     if (target.startsWith("#")) {
-      this.executePrivmsgChannel(context, lineWriter, target, message);
+      this.executePrivmsgChannel(context, target, message);
       return;
     }
 
@@ -83,7 +89,6 @@ public final class OxServerClientCommandPRIVMSG
 
   private void executePrivmsgChannel(
     final OxServerClientCommandContextType context,
-    final BufferedWriter lineWriter,
     final String target,
     final OxIRCMessage message)
     throws IOException

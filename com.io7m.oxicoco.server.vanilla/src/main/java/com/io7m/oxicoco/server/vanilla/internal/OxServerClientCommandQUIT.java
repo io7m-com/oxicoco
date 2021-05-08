@@ -18,12 +18,19 @@ package com.io7m.oxicoco.server.vanilla.internal;
 
 import com.io7m.oxicoco.messages.OxIRCMessage;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
+
+/**
+ * The QUIT command.
+ */
 
 public final class OxServerClientCommandQUIT
   implements OxServerClientCommandHandlerType
 {
+  /**
+   * The QUIT command.
+   */
+
   public OxServerClientCommandQUIT()
   {
 
@@ -32,7 +39,6 @@ public final class OxServerClientCommandQUIT
   @Override
   public void execute(
     final OxServerClientCommandContextType context,
-    final BufferedWriter lineWriter,
     final OxIRCMessage message)
     throws IOException
   {

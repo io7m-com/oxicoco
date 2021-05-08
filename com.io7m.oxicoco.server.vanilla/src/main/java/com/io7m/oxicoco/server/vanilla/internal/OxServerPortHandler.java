@@ -32,6 +32,11 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * A handler for a single server port. Servers listening on multiple ports
+ * (for TLS and plain text connections, for example) will have multiple handlers.
+ */
+
 public final class OxServerPortHandler implements Closeable
 {
   private static final Logger LOG =
@@ -42,6 +47,14 @@ public final class OxServerPortHandler implements Closeable
   private final OxServerPortConfiguration portConfiguration;
   private final AtomicBoolean closed;
   private final AtomicReference<ServerSocket> socketReference;
+
+  /**
+   * A handler for a single server port.
+   *
+   * @param inController    The server controller
+   * @param inServerSockets The factory of sockets
+   * @param inPort          The port configuration
+   */
 
   public OxServerPortHandler(
     final OxServerControllerType inController,
@@ -60,6 +73,12 @@ public final class OxServerPortHandler implements Closeable
     this.socketReference =
       new AtomicReference<>();
   }
+
+  /**
+   * Start the port handler.
+   *
+   * @param future The future that will be notified when the handler is running
+   */
 
   public void start(
     final CompletableFuture<Void> future)

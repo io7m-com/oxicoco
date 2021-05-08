@@ -21,15 +21,35 @@ import com.io7m.oxicoco.names.OxNickName;
 import com.io7m.oxicoco.names.OxUserName;
 import org.immutables.value.Value;
 
+/**
+ * The type of server user IDs.
+ */
+
 @ImmutablesStyleType
 @Value.Immutable
 public interface OxUserIDType
 {
+  /**
+   * @return The user's nick name
+   */
+
   OxNickName nick();
+
+  /**
+   * @return The user's name
+   */
 
   OxUserName user();
 
+  /**
+   * @return The user's host
+   */
+
   String host();
+
+  /**
+   * @return The user ID formatted as a string
+   */
 
   default String format()
   {

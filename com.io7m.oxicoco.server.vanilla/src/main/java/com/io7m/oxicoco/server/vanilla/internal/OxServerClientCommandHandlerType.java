@@ -18,15 +18,25 @@ package com.io7m.oxicoco.server.vanilla.internal;
 
 import com.io7m.oxicoco.messages.OxIRCMessage;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
+
+/**
+ * The base type of client command handlers.
+ */
 
 public interface OxServerClientCommandHandlerType
 {
+  /**
+   * Execute the command.
+   *
+   * @param context The command execution context
+   * @param message The incoming message
+   *
+   * @throws IOException On I/O errors
+   */
+
   void execute(
     OxServerClientCommandContextType context,
-    BufferedWriter lineWriter,
-    OxIRCMessage message
-  )
+    OxIRCMessage message)
     throws IOException;
 }

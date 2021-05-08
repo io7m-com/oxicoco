@@ -29,6 +29,11 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+/**
+ * A map of clients that preserves the various invariants required by an IRC
+ * server.
+ */
+
 public final class OxClientMap
 {
   private static final Logger LOG =
@@ -38,6 +43,12 @@ public final class OxClientMap
   private final HashMap<OxServerClientID, OxNickName> idToNick;
   private final HashMap<OxServerClientID, OxServerClient> clients;
   private final Supplier<OxServerClientID> idSupplier;
+
+  /**
+   * Construct a client map.
+   *
+   * @param inIdSupplier A supplier of server client IDs
+   */
 
   public OxClientMap(
     final Supplier<OxServerClientID> inIdSupplier)
@@ -61,10 +72,22 @@ public final class OxClientMap
     }
   }
 
+  /**
+   * @return A read-only snapshot of the current list of clients
+   */
+
   public Collection<OxServerClient> clients()
   {
     return List.copyOf(this.clients.values());
   }
+
+  /**
+   * Create and register a new client.
+   *
+   * @param creator The client creator
+   *
+   * @return A new client
+   */
 
   public OxServerClient clientCreate(
     final Function<OxServerClientID, OxServerClient> creator)
@@ -77,6 +100,14 @@ public final class OxClientMap
     return client;
   }
 
+  /**
+   * Find the client with the given id.
+   *
+   * @param id The id
+   *
+   * @return The client, if present
+   */
+
   public Optional<OxServerClient> clientOf(
     final OxServerClientID id)
   {
@@ -84,12 +115,31 @@ public final class OxClientMap
     return Optional.ofNullable(this.clients.get(id));
   }
 
+  /**
+   * Find the client with the given nick.
+   *
+   * @param nickName The nick
+   *
+   * @return The client, if present
+   */
+
   public Optional<OxServerClient> clientForNick(
     final OxNickName nickName)
   {
     return Optional.ofNullable(this.nickToId.get(nickName))
       .flatMap(id -> Optional.ofNullable(this.clients.get(id)));
   }
+
+  /**
+   * Set the given client's nick name.
+   *
+   * @param client The client
+   * @param name   The new name
+   *
+   * @return The new nick
+   *
+   * @throws OxClientException On errors such as nick name collisions
+   */
 
   public Optional<OxNickName> clientSetNick(
     final OxServerClient client,
@@ -146,6 +196,12 @@ public final class OxClientMap
     return Optional.of(currentNick);
   }
 
+  /**
+   * Destroy a client.
+   *
+   * @param client The client
+   */
+
   public void clientDestroy(
     final OxServerClient client)
   {
@@ -163,12 +219,24 @@ public final class OxClientMap
     this.clients.remove(clientId);
   }
 
+  /**
+   * @param client The client
+   *
+   * @return The nick of the given client
+   */
+
   public Optional<OxNickName> clientNick(
     final OxServerClient client)
   {
     Objects.requireNonNull(client, "client");
     return Optional.ofNullable(this.idToNick.get(client.id()));
   }
+
+  /**
+   * @param client The client
+   *
+   * @return The user ID of the given client
+   */
 
   public Optional<OxUserID> clientUserId(
     final OxServerClient client)
@@ -188,12 +256,20 @@ public final class OxClientMap
     );
   }
 
+  /**
+   * Clear the map, deleting all clients.
+   */
+
   public void clear()
   {
     this.clients.clear();
     this.idToNick.clear();
     this.nickToId.clear();
   }
+
+  /**
+   * @return The number of clients present
+   */
 
   public int clientCount()
   {

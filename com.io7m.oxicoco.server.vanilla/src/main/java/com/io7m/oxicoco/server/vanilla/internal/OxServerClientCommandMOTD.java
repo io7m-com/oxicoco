@@ -18,16 +18,23 @@ package com.io7m.oxicoco.server.vanilla.internal;
 
 import com.io7m.oxicoco.messages.OxIRCMessage;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 
 import static com.io7m.oxicoco.errors.OxIRCReply.RPL_ENDOFMOTD;
 import static com.io7m.oxicoco.errors.OxIRCReply.RPL_MOTD;
 import static com.io7m.oxicoco.errors.OxIRCReply.RPL_MOTDSTART;
 
+/**
+ * The MOTD command.
+ */
+
 public final class OxServerClientCommandMOTD
   implements OxServerClientCommandHandlerType
 {
+  /**
+   * The MOTD command.
+   */
+
   public OxServerClientCommandMOTD()
   {
 
@@ -36,7 +43,6 @@ public final class OxServerClientCommandMOTD
   @Override
   public void execute(
     final OxServerClientCommandContextType context,
-    final BufferedWriter lineWriter,
     final OxIRCMessage message)
     throws IOException
   {

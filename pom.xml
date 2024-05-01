@@ -45,9 +45,9 @@
   </licenses>
 
   <scm>
-    <url>https://github.com/io7m/oxicoco</url>
-    <connection>scm:git:https://github.com/io7m/oxicoco</connection>
-    <developerConnection>scm:git:https://github.com/io7m/oxicoco</developerConnection>
+    <url>https://www.github.com/io7m-com/oxicoco</url>
+    <connection>scm:git:https://www.github.com/io7m-com/oxicoco</connection>
+    <developerConnection>scm:git:https://www.github.com/io7m-com/oxicoco</developerConnection>
   </scm>
 
   <developers>
@@ -60,7 +60,7 @@
   </developers>
 
   <issueManagement>
-    <url>https://www.github.com/io7m/oxicoco/issues</url>
+    <url>https://www.github.com/io7m-com/oxicoco/issues</url>
     <system>GitHub Issues</system>
   </issueManagement>
 
@@ -82,7 +82,7 @@
 
   <ciManagement>
     <system>GitHub Actions</system>
-    <url>https://github.com/oxicoco/actions</url>
+    <url>https://www.github.com/io7m-com/oxicoco/actions</url>
   </ciManagement>
 
   <prerequisites>
